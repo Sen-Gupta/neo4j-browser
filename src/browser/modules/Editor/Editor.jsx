@@ -232,6 +232,7 @@ export class Editor extends Component {
       return
     }
     this.codeMirror = this.editor.getCodeMirror()
+    this.buildQuery()
     this.codeMirror.on('change', (cm, changed) => {
       try {
         this.triggerAutocompletion(cm, changed)
@@ -241,6 +242,15 @@ export class Editor extends Component {
     })
   }
 
+  buildQuery () {
+    var urlParams = new URLSearchParams(window.location.search)
+    var hasQuery = urlParams.has('runquery')
+    if (hasQuery) {
+      var query = urlParams.get('runquery')
+      query = decodeURI(query)
+      this.codeMirror.setValue(query)
+    }
+  }
   getEditorValue () {
     return this.codeMirror ? this.codeMirror.getValue().trim() : ''
   }
