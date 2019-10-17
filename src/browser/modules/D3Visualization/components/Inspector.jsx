@@ -38,7 +38,7 @@ import {
 } from './styled'
 import { GrassEditor } from './GrassEditor'
 import { RowExpandToggleComponent } from './RowExpandToggle'
-import ClickableUrls from '../../../components/clickable-urls'
+//  import ClickableUrls from '../../../components/clickable-urls'
 
 const mapItemProperties = itemProperties =>
   itemProperties
@@ -52,7 +52,13 @@ const mapItemProperties = itemProperties =>
           {prop.key + ': '}
         </StyledInspectorFooterRowListKey>
         <StyledInspectorFooterRowListValue className='value'>
-          <ClickableUrls text={optionalToString(prop.value)} />
+          {prop.key === 'Launch' ? (
+            <a href={optionalToString(prop.value)} target='_blank'>
+              Content Editor
+            </a>
+          ) : (
+            optionalToString(prop.value)
+          )}
         </StyledInspectorFooterRowListValue>
       </StyledInspectorFooterRowListPair>
     ))
